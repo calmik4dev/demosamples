@@ -1,0 +1,92 @@
+ <?php
+$videourl = "";
+$mediaurl = $block->getMediaUrl();
+$videos = $block->getVideo(1);
+$videourl = "";
+if(sizeof($videos) > 0):
+	$videos = $videos->toArray();
+	$videolink =0;
+	$videomanual = 0;
+	$imageurl = $mediaurl.$videos['items'][0]['desktop_background_image'];
+	$videourl ="";
+?>
+<?php 
+if($videos['items'][0]['video_manually_upload']){
+	$videomanual = 1;
+	$videourl = $mediaurl.$videos['items'][0]['video_manually_upload']; 
+}
+if($videos['items'][0]['video_live_link'] && $videourl == ""){
+	$videolink = 1;
+	$videourl = $videos['items'][0]['video_live_link'];
+}
+if($videourl== "")
+	$videourl = $mediaurl."manually_video/SLO_TheMission_30_MASTER_weexist.mp4";
+
+?>
+<div class="video-section-center">
+	<div class="video-banner-section" id="we-exist-video-banner-section" style="background-color: #fff;background-image: url('<?php echo $imageurl ?>');">
+		<input type="hidden" name="mobile-image" id="mobile-image" value="<?php echo $mediaurl.$videos['items'][0]['mobile_background_image'] ?>" />
+	    <div class="video-banner-text">
+			<div class="container" id="we-exist-video-container">
+		        <div class="row">
+		            <div class="col-sm-12">
+				        <div class="video-content">
+				            <h2><?php echo $videos['items'][0]['video_title'] ?></h2>
+				            <a href="javascript:;" id="weexist_show_video"><img src="<?php echo $mediaurl ?>wysiwyg/video-icon.png" alt="" /></a>
+				        </div>
+					</div>
+			
+				</div>
+			</div>
+		</div>
+		<div class="we-exist_videoWrapper" style="display:none;">
+		<?php if($videolink == 1 && $videomanual == 0): ?>
+			<iframe width="560" id="video" height="315" src="<?php echo $videos['items'][0]['video_live_link'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+		
+		<?php endif; ?>
+		<?php if($videolink ==0) :?>
+			<div id='player'>
+				<video id='video-element'>
+					<source src='' type='video/mp4'>
+				</video>
+				<div id='controls'>
+					<progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
+					<button id='btnReplay' class='replay' title='replay' accesskey="R" onclick='replayVideo();'>Replay</button>	
+					<button id='btnPlayPause' class='play' title='play' accesskey="P" onclick='playPauseVideo();'>Play</button>
+					<button id='btnStop' class='stop' title='stop' accesskey="X" onclick='stopVideo();'>Stop</button>
+			  		<input type="range" id="volume-bar" title="volume" min="0" max="1" step="0.1" value="1">
+					<button id='btnMute' class='mute' title='mute' onclick='muteVolume();'>Mute</button>	
+			  		<button id='btnFullScreen' class='fullscreen' title='toggle full screen' accesskey="T" onclick='toggleFullScreen();'>[&nbsp;&nbsp;]</button>
+				</div>
+			</div>
+		<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+<?php
+	
+endif;
+?>
+<script>
+
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+  	$("#weexist_show_video").click(function(){
+  		var videoUrl = "<?= $videourl ?>";
+  		<?php if($videolink==0){ ?>
+	  		$('#video-element source').attr('src',videoUrl);
+	  		$("#video-element").load();
+	  		$( "#btnPlayPause" ).trigger( "click" );
+	  	<?php } ?>
+	  	<?php if($videolink==1){ ?>
+	  		
+  			$("#video")[0].src += "?autoplay=1";
+	  	<?php } ?>
+  		$(".video-banner-section").addClass("show-video");
+  		$(".we-exist_videoWrapper").css("display","block");
+  		return false;
+  	});	
+  });
+
+});</script>
