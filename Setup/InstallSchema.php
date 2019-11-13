@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\DynamicVideos\Setup;
+namespace Dynamicdd\Dynamicvideos\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

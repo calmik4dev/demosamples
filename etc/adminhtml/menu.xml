@@ -1,15 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
     <menu>
-        <add
-                id="Dynamic_DynamicVideos::videos"
-                title="Sambazon Dynamic Videos on Pages"
-                module="Dynamic_DynamicVideos"
-                sortOrder="90"
-                parent="Dynamic_Footerbrand::parent"
-                resource="Dynamic_DynamicVideos::dynamicvideos"
-        />
-		<add id="Dynamic_DynamicVideos::dynamicvideos" title="Dynamic Videos" module="Dynamic_DynamicVideos" sortOrder="2"  action="dynamicvideos/dynamicvideos" resource="Dynamic_DynamicVideos::dynamicvideos" parent="Dynamic_DynamicVideos::videos"/>
+        <add id="Dynamicdd_Dynamicvideos::parent" title="Dynamicvideos" module="Dynamicdd_Dynamicvideos" sortOrder="100" resource="Dynamicdd_Dynamicvideos::parent"/>
+        <add id="Dynamicdd_Dynamicvideos::index" title="Dynamicvideos Index" module="Dynamicdd_Dynamicvideos" sortOrder="10" action="dynamicvideos/index" resource="Dynamicdd_Dynamicvideos::index" parent="Dynamicdd_Dynamicvideos::parent"/>
+		<add id="Dynamicdd_Dynamicvideos::dynamiccvideos" title="Dynamicvideos Dynamiccvideos" module="Dynamicdd_Dynamicvideos" sortOrder="20" parent="Dynamicdd_Dynamicvideos::parent" action="dynamicvideos/dynamiccvideos" resource="Dynamicdd_Dynamicvideos::dynamiccvideos"/>
 
     </menu>
 </config>
