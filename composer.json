@@ -24,6 +24,6 @@
             "Dynamicdd\\Dynamicvideos\\": ""
         }
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
